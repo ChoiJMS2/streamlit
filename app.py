@@ -14,10 +14,10 @@ if __name__ == '__main__':
     st.text('This is so {}'.format("good"))
 
     # Header
-    st.header('This is subHeader')
+    st.header('This is Header')
 
     # Subheader
-    st.subheader('This is Markdown')
+    st.subheader('This is SubHeader')
 
     # Markdown
     st.markdown('## This is Markdown')
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     iris = pd.read_csv('data/iris.csv')
 
     st.title('IRIS 테이블')
-    st.dataframe(iris, 500, 400)    # Height, Width
+    st.dataframe(iris, 500, 400)    # data, Height, Width
 
     st.title('table()')
     st.table(iris)
@@ -91,7 +91,7 @@ if __name__ == '__main__':
     img = Image.open('data/dad.jpg')
     st.image(img)
 
-    url = 'https://james-choi88.tistory.com/28'
+    url = 'https://static.ebs.co.kr/images/public/lectures/2014/06/19/10/bhpImg/44deb98d-1c50-4073-9bd7-2c2c28d65f9e.jpg'
     st.image(url)
 
     # 비디오 출력
@@ -104,7 +104,40 @@ if __name__ == '__main__':
         audio_file = rb.read()
         st.audio(audio_file, format="audio/mp3")
 
+if __name__ == "__main__":
+    main()
+
+col1,col2 = st.columns([4,9])
+# 공간을 4:9 으로 분할하여 col1과 col2라는 이름을 가진 컬럼을 생성합니다.
+
+with col1 :
+  # column 1 에 담을 내용
+  st.title('Here is column1')
+
+with col2 :
+  # column 2 에 담을 내용
+  st.title('Here is column2')
+  st.checkbox('This is checkbox1 in col2 ')
+
+
+# with 구문 말고 다르게 사용 가능
+col1.subheader(' I am column1 Subheader !! ')
+col2.checkbox('This is checkbox2 in col2 ')
+#=>위에 with col2: 안의 내용과 같은 기능을합니다
 
 
 if __name__ == "__main__":
     main()
+
+# 탭 생성 : 첫번째 탭의 이름은 Tab A 로, Tab B로 표시합니다.
+tab1, tab2 = st.tabs(['Tab A', 'Tab B'])
+
+with tab1:
+    # tab A 를 누르면 표시될 내용
+    st.write('hello')
+
+with tab2:
+    # tab B를 누르면 표시될 내용
+    st.write('hi')
+
+add_selectbox = st.sidebar.selectbox("왼쪽 사이드바 Select Box", ("A", "B", "C"))
