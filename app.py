@@ -1,6 +1,8 @@
 # -*- coding:UTF-8 -*-
 import streamlit as st
 import pandas as pd
+from utils import p_lans
+from PIL import Image
 
 def main():
     st.title("Hello World!")
@@ -72,8 +74,35 @@ if __name__ == '__main__':
     if st.checkbox('show/hide'):
         st.text('무언가를 보여줘!!')
 
+    # Select Box
+    choice = st.selectbox('프로그래밍 언어', p_lans)
+    st.write(f'{choice} 언어를 선택함')
 
+    # multiple selection
+    lans = ("영어", "일본어", "중국어", "독일어")
+    myChoice = st.multiselect("언어선택", lans, default="중국어")
+    st.write("선택", myChoice)
 
+    # Slider
+    age = st.slider('나이', 1, 120)
+    st.write(age)
+
+    # 이미지 가져오기
+    img = Image.open('data/dad.jpg')
+    st.image(img)
+
+    url = 'https://james-choi88.tistory.com/28'
+    st.image(url)
+
+    # 비디오 출력
+    with open('data/secret_of_success.mp4', 'rb') as rb:
+        video_file = rb.read()
+        st.video(video_file)
+
+    # 오디오 출력
+    with open('data/song.mp3','rb') as rb:
+        audio_file = rb.read()
+        st.audio(audio_file, format="audio/mp3")
 
 
 
