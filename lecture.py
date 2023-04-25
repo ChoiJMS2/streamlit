@@ -3,6 +3,9 @@ import streamlit as st
 import pandas as pd
 from utils import p_lans
 from PIL import Image
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.express as px
 
 def main():
     st.title("Hello World!")
@@ -107,37 +110,29 @@ if __name__ == '__main__':
 if __name__ == "__main__":
     main()
 
-col1,col2 = st.columns([4,9])
-# 공간을 4:9 으로 분할하여 col1과 col2라는 이름을 가진 컬럼을 생성합니다.
+    # 산점도 그리기
+    fig = px.scatter(data_frame=iris,
+                 x='sepal_length',
+                 y='sepal_width')
+    st.plotly_chart(fig)
 
-with col1 :
-  # column 1 에 담을 내용
-  st.title('Here is column1')
+    # 단 나누기
+    choice = st.selectbox('프로그래밍 언어', iris['species'].unique())
+    # st.title(choice)
 
-with col2 :
-  # column 2 에 담을 내용
-  st.title('Here is column2')
-  st.checkbox('This is checkbox1 in col2 ')
+    result = iris[iris['species'] == choice].reset_index(drop=True)
+    # st.dataframe(result)
 
+    #단 나누기
+    col1, col2 = st.columns([0.5, 0.5], gap='large')
+    with col1:
+        fig2, ax = plt.subplots()
+        # ax.scatter(x=iris['petal_length'], y=iris['sepal_width'])
+        sns.scatterplot(result, x='petal_length',
+                        y='sepal_width')
+        st.pyplot(fig2)
 
-# with 구문 말고 다르게 사용 가능
-col1.subheader(' I am column1 Subheader !! ')
-col2.checkbox('This is checkbox2 in col2 ')
-#=>위에 with col2: 안의 내용과 같은 기능을합니다
-
-
-if __name__ == "__main__":
-    main()
-
-# 탭 생성 : 첫번째 탭의 이름은 Tab A 로, Tab B로 표시합니다.
-tab1, tab2 = st.tabs(['Tab A', 'Tab B'])
-
-with tab1:
-    # tab A 를 누르면 표시될 내용
-    st.write('hello')
-
-with tab2:
-    # tab B를 누르면 표시될 내용
-    st.write('hi')
-
-add_selectbox = st.sidebar.selectbox("왼쪽 사이드바 Select Box", ("A", "B", "C"))
+    with col2:
+        fig3, ax = plt.subplots()
+        ax.scatter(x=result['sepal_length'], y=result['sepal_width'])
+        st.pyplot(fig3)
