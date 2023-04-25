@@ -5,6 +5,7 @@ from utils import dec_temp
 from eda_app import run_eda_app
 from ml_app import run_ml_app
 def main():
+    st.subheader("Choi's ML Project")
     st.markdown(html_temp, unsafe_allow_html=True)
 
     menu = ['HOME', 'EDA', 'ML', 'About']

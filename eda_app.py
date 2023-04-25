@@ -20,10 +20,10 @@ def run_eda_app():
         with st.expander('데이터 타입'):
             result1 = pd.DataFrame(iris.dtypes)
             st.write(result1)
-        with st.expander("기술 통계량"):
+        with st.expander("기초 통계량"):
             result2 = iris.describe()
             st.write(result2)
-        with st.expander("타깃 빈도 수 확인"):
+        with st.expander("Target 빈도 수 확인"):
             st.write(iris['species'].value_counts())
     elif submenu == '그래프분석':
         st.title("Title")
@@ -58,7 +58,7 @@ def run_eda_app():
         # Tabs
         # iris의 종별 산점도 그래프 탭 만들기
         # Plotly 사용
-        tab1, tab2, tab3, tab4, tab5 = st.tabs(['Select','Setosa', 'Versicolor', 'Virginica', 'Kaggle'])
+        tab1, tab2, tab3, tab4, tab5 = st.tabs(['Select','Setosa', 'Versicolor', 'Virginica', 'ETC'])
         with tab1:
             with tab1:
                 # 종 선택할 때마다
